@@ -2,23 +2,24 @@ import time
 import random
 import string
 import os
+import re
 from threading import *
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+import fnmatch
 
-
-playerMinThreshold = 3 #Enter the minimum player threshold you desire (Note that the threshold includes the bot as well)
-url = 'https://skribbl.io/?abl7KtJTRwJp'
-botcount = 6
+playerMinThreshold = 3 # Includes you
+url = 'https://skribbl.io/?rbtxUXVomzSV'
+botcount = 5
 
 disconnect = False
 pause = False
 kicked = False
 autoguess = False
-botName = "prodrawer69"
+botName = "Sub2MrBeast"
 
 print('Starting...')
 
@@ -56,6 +57,35 @@ def sendall(message):
 		except Exception as e:
 			pass
 
+def updateword():
+	global drawword
+	global correctword
+	global wordlength
+	global halfword
+	for i in tablist:
+		driver.switch_to.window(i)
+
+		try:
+			drawword = driver.find_element(By.XPATH, '//*[@id="overlay"]/div/div[3]/div[1]')
+			drawword.click()
+			correctword = drawword.text
+			wordlength = len(correctword)
+			break
+		except Exception as e:
+			pass
+
+		try:
+			guessword = driver.find_element(By.XPATH, '//*[@id="currentWord"]').text
+			if "_" not in guessword:
+				correctword = guessword
+				wordlength = len(guessword)
+			elif len(set(guessword)) > 1:
+				halfword = guessword
+				wordlength = len(guessword)
+			else:
+				wordlength = len(guessword)
+		except Exception as e:
+			pass
 
 def initfunc():
 	global driver
@@ -70,17 +100,24 @@ def initfunc():
 	for i in range(botcount):
 		driver.switch_to.new_window('tab')
 		driver.get(url)
-		driver.implicitly_wait(2)
+		driver.implicitly_wait(1.5)
 		driver.find_element(By.XPATH, '//*[@id="inputName"]').clear()
-		driver.find_element(By.XPATH, '//*[@id="inputName"]').send_keys(botName)
+		driver.find_element(By.XPATH, '//*[@id="inputName"]').send_keys(botName + str(i + 1))
 		time.sleep(0.2)
 		tablist.append(driver.current_window_handle)
 		print('1 Bot Ready to Join Game')
-	choice =  input("Press Enter to Join ")
+	tempvar = input("Press Enter to Join")
 	for i in tablist:
 		driver.switch_to.window(i)
 		driver.implicitly_wait(0.2)
 		driver.find_element(By.XPATH, '//*[@id="formLogin"]/button[1]').click()
+		#try:
+		#	driver.find_element(By.XPATH, '//*[@id="divFullscreenLoading"]')
+		#	print("One Bot Stuck On Ad, Closing Window")
+		#	tablist.remove(i)
+		#	driver.close()
+		#except:
+		#	pass
 		# //*[@id="divFullscreenLoading"]
 		# Xpath for Adinplay Ads
 		print('Sent 1 Bot to Join Game')
@@ -88,6 +125,7 @@ def initfunc():
 initfunc()
 os.system('clear')
 print('Bots Are In The Game!')
+tempvar = input("Press Enter to Test Connection")
 try:
 	for i in tablist:
 		driver.switch_to.window(i)
@@ -95,8 +133,8 @@ try:
 except Exception as e:
 	if "Message: element not interactable" in str(e):
 		print('One Bot Stuck On Ad, Closing Window')
-			tablist.remove(i)
-			driver.close()
+		tablist.remove(i)
+		driver.close()
 
 while True:
 	if autoguess == False:
@@ -146,42 +184,32 @@ while True:
 		count = 0
 		totalcount = 0
 		correctword = ' '
+		halfword = ''
+		wordlength = 0
 
-		for i in tablist:
-			driver.switch_to.window(i)
-
-			try:
-				drawword = driver.find_element(By.XPATH, '//*[@id="overlay"]/div/div[3]/div[1]')
-				drawword.click()
-				correctword = drawword.text
-				wordlength = len(correctword)
-				break
-			except Exception as e:
-				pass
-
-			try:
-				guessword = driver.find_element(By.XPATH, '//*[@id="currentWord"]').text
-				if "_" not in guessword:
-					correctword = guessword
-				else:
-					wordlength = len(guessword)
-			except Exception as e:
-				pass
+		updateword()
 
 		print('Length of Word: ' + str(wordlength))
-
-		f = open('wordlist.txt', 'r')
-
-		for line in f:
-			testword = line.strip('\n')
-			if len(testword) == wordlength:
-				possible.append(testword)
 
 		if correctword != ' ':
 			autoguess = False
 			sendall(correctword)
 			print('Word: ' + correctword)
 			continue
+
+		f = open('wordlist.txt', 'r')
+		for line in f:
+			testword = line.strip('\n')
+			if halfword != '':
+				halfdot = halfword.replace("_", ".")
+				if len(testword) == wordlength:
+					reg = re.compile(halfdot)
+					if bool(re.match(reg, testword)):
+						possible.append(testword)
+			else:
+				if len(testword) == wordlength:
+					possible.append(testword)
+
 		for word in possible:
 			if count == botcount - 1:
 				count = 0
@@ -190,8 +218,8 @@ while True:
 				chatsend(word)
 				time.sleep(0.15)
 				lastchat = getlastchat()
-				successmsg = botName + " guessed the word"
-				if successmsg.lower() in lastchat.lower():
+
+				if botName in lastchat and "guessed the word" in lastchat:
 					print("Word Was Guessed")
 					correctword = possible[totalcount]
 					autoguess = False
@@ -199,6 +227,8 @@ while True:
 					break
 				else:
 					print("Last Chat: " + lastchat)
+					if "Spam detected" in lastchat:
+						time.sleep(2)
 			except Exception as e:
 				if "Message: element not interactable" in str(e):
 					print('One Bot Stuck On Ad, Closing Window')
