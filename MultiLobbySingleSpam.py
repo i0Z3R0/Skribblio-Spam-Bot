@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-playerMinThreshold = 1 # Includes you
+playerMinThreshold = 5 # Includes you
 url = 'https://skribbl.io/'
 
 colors = {'white': '//*[@id="containerBoard"]/div[2]/div[2]/div[1]/div[1]',
@@ -49,21 +49,34 @@ botName = "BestSpamBot"
 attempt = 1
 obnoxious = True
 messages = ["You all suck at this game", "Hi I am here to annoy you", "How is everybody today?", "Please let me know if you like my spamming"]
+spamcount = 0
+drawcount = 0
+strokecount = 0
 
 print('Starting...')
 
 def playercountupdate():
 	driver.implicitly_wait(3)
 	playerCount = 0
+	if obnoxious:
+		chatsend('Checking player count...')
 	while playerCount < 1:
-		playerCount = driver.find_element(By.XPATH, '//*[@id="containerGamePlayers"]').size['height'] / 48
+		try:
+			playerCount = driver.find_element(By.XPATH, '//*[@id="containerGamePlayers"]').size['height'] / 48
+		except:
+			return 0
 	return int(playerCount)
 
 def kickcheck():
 	if obnoxious:
-		chatsend("Checking if kicked...")
+		try:
+			chatsend("Checking if kicked...")
+		except:
+			return True
 	try:
 		if (driver.find_element(By.XPATH, '//*[@id="modalKicked"]/div/div/div[1]/h4').text) == "You have been kicked.":
+			return True
+		if (driver.find_element(By.XPATH, '//*[@id="modalDisconnect"]/div/div/div[1]/h4').text) == "Connection lost.":
 			return True
 	except:
 		return False
@@ -73,7 +86,12 @@ def getlastchat():
 	return lastmsg
 
 def limitcheck():
-	lastmsg = driver.find_element(By.XPATH, '//*[@id="boxMessages"]/p[last()]').text
+	try:
+		lastmsg = driver.find_element(By.XPATH, '//*[@id="boxMessages"]/p[last()]').text
+	except:
+		# Don't need to initiate lobby rejoin, it'll happen automatically later
+		# This optimizes the code a bit
+		pass
 	if lastmsg == "Spam detected! You're sending too many messages.":
 		pause = True
 		time.sleep(3)
@@ -93,30 +111,54 @@ def checkdraw():
 		chatsend("Checking for draw popup...")
 	try:
 		drawword = driver.find_element(By.XPATH, '//*[@id="overlay"]/div/div[3]/div[1]')
+		if obnoxious:
+			chatsend(botName + " may not be held liable for any damage caused or sustained by...")
+			time.sleep(0.9)
+			chatsend("the following actions, including any damage caused to third parties as a consequence of...")
+			time.sleep(0.9)
+			chatsend("or during the implementation of the action.")
+			time.sleep(0.9)
+			chatsend("Photosensitivity warning!")
 		drawword.click()
 		return True
 	except:
 		return False
 
 def drawspam():
+	global drawcount
+	global strokecount
 	print("Starting to Draw")
 	try:
 		driver.find_element(By.XPATH, drawtools["fill"]).click()
+		driver.implicitly_wait(0.5)
+		time.sleep(0.01)
+		driver.find_element(By.XPATH, colors["black"]).click()
 	except:
-		# Spawnnkilled on draw turn oof
+		# Spawnnkilled on draw turn    oof
 		# Didn't even add this until people spawnkilled me lol
 		return True
+	drawcount += 1
 	while True:
 		try:
-			driver.implicitly_wait(0.5)
-			time.sleep(0.05)
-			driver.find_element(By.XPATH, colors["black"]).click()
-			driver.implicitly_wait(0.5)
-			time.sleep(0.05)
+			driver.implicitly_wait(0.1)
+			time.sleep(0.2)
 			driver.find_element(By.XPATH, drawtools["canvas"]).click()
-			driver.implicitly_wait(0.5)
-			time.sleep(0.075)
+			strokecount += 1
+			driver.implicitly_wait(0.1)
+			time.sleep(0.2)
 			driver.find_element(By.XPATH, drawtools["clear"]).click()
+			strokecount += 1
+			if (strokecount % 10 == 0 or strokecount % 11 == 0) and strokecount != 0:
+				try:
+					chatsend("Are you guys enjoying my drawing?")
+					if kickcheck() == True:
+						print('Kicked, Rejoining')
+						return True
+					driver.find_element(By.XPATH, drawtools["fill"]).click()
+					driver.implicitly_wait(0.5)
+				except:
+					print('Kicked, Rejoining')
+					return True
 		except:
 			return True
 
@@ -125,12 +167,13 @@ def initbot():
 	caps = DesiredCapabilities().CHROME
 	caps["pageLoadStrategy"] = "normal"
 	chrome_options = Options()
-	# chrome_options.add_argument("--headless")
+	chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--mute-audio")
 	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
 	os.system('clear')
 
 def initspam():
+	global spamcount
 	print('Starting Spam')
 	scounter = 0
 	while True:
@@ -138,14 +181,26 @@ def initspam():
 			if scounter % 10 == 0 and scounter != 0:
 				if checkdraw() == True:
 					drawspam()
-			if scounter % 20 == 0 and scounter != 0:
+			if scounter == 20:
 				if kickcheck() == True:
 					print("Kicked, Rejoining")
 					return True
+			if scounter == 30:
+				if playercountupdate() < playerMinThreshold:
+					print('Not enough players, leaving lobby')
+					print(f'Spammed a total of {spamcount} messages in all lobbies')
+					time.sleep(0.75)
+					if obnoxious:
+						chatsend("Not enough players, I'm out of here")
+					return True
 				else:
 					scounter = 0
-					continue
-			chatsend(message)
+			try:
+				chatsend(message)
+			except:
+				print('Kicked, Rejoining')
+				return True
+			spamcount += 1
 			scounter += 1
 			time.sleep(0.85)
 			limitcheck()
@@ -173,13 +228,15 @@ def joinlobby():
 	if pcount < playerMinThreshold:
 		attempt += 1
 		print("Too Little Players, Retrying")
+		chatsend('Sorry, this lobby is too small for me to spam in')
+		time.sleep(1)
 		joinlobby()
 	try:
 		chatsend('Connection Test')
 	except Exception as e:
 		print('Error: ' + str(e))
 	print(f'Found a Lobby! Attempts Taken: {attempt}\nPlayer Count: {pcount}')
-	attempt = 0
+	attempt = 1
 
 initbot()
 
