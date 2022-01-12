@@ -1,21 +1,18 @@
 import time
-import random
 import string
 import os
 import re
-from threading import *
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import fnmatch
 
-playerMinThreshold = 3 # Includes you
-url = 'https://skribbl.io/?rbtxUXVomzSV'
-botcount = 5
+url = 'https://skribbl.io/?wcsRGlqzf7Yn'
+botcount = 6
 
-disconnect = False
 pause = False
 kicked = False
 autoguess = False
@@ -30,13 +27,23 @@ def playercountupdate():
 		playerCount = driver.find_element(By.XPATH, '//*[@id="containerGamePlayers"]').size['height'] / 48
 	return int(playerCount)
 
+#def kickcheck():
+#	for i in tablist:
+#		driver.switch_to.window(i)
+#		try:
+#			driver.find_element(By.XPATH, '//*[@id="modalKicked"]')
+#			print('One Bot Kicked, Trying to Rejoin')
+#			driver.refresh()
+#			driver.implicitly_wait(0.2)
+#			driver.find_element(By.XPATH, '//*[@id="formLogin"]/button[1]').click()
+
+
 def getlastchat():
 	lastmsg = driver.find_element(By.XPATH, '//*[@id="boxMessages"]/p[last()]').text
 	return lastmsg
 
 def limitcheck():
 	lastmsg = driver.find_element(By.XPATH, '//*[@id="boxMessages"]/p[last()]').text
-	print(lastmsg)
 	if lastmsg == "Spam detected! You're sending too many messages.":
 		pause = True
 		time.sleep(5)
@@ -87,14 +94,16 @@ def updateword():
 		except Exception as e:
 			pass
 
-def initfunc():
+def initbot():
 	global driver
 	global tablist
 	global botcount
+	caps = DesiredCapabilities().CHROME
+	caps["pageLoadStrategy"] = "none"
 	chrome_options = Options()
 	chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--mute-audio")
-	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
 	os.system('clear')
 	tablist = []
 	for i in range(botcount):
@@ -122,7 +131,7 @@ def initfunc():
 		# Xpath for Adinplay Ads
 		print('Sent 1 Bot to Join Game')
 
-initfunc()
+initbot()
 os.system('clear')
 print('Bots Are In The Game!')
 tempvar = input("Press Enter to Test Connection")
@@ -193,6 +202,7 @@ while True:
 
 		if correctword != ' ':
 			autoguess = False
+			sendall(f"The word is: {correctword}")
 			sendall(correctword)
 			print('Word: ' + correctword)
 			continue
@@ -226,7 +236,6 @@ while True:
 					sendall(correctword)
 					break
 				else:
-					print("Last Chat: " + lastchat)
 					if "Spam detected" in lastchat:
 						time.sleep(2)
 			except Exception as e:
@@ -254,7 +263,7 @@ while True:
 		time.sleep(1)
 		break
 
-	time.sleep(0.75)
+	time.sleep(0.25)
 
 	# print(f'Player Count: {playercountupdate()}')
 
