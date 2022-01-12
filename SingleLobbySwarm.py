@@ -10,15 +10,16 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import fnmatch
 
-url = 'https://skribbl.io/?WcsRGlqzf7Yn'
+url = 'https://skribbl.io/?XXXXXXXXXXXX'
+headlessmode = True
 botcount = 6
+botName = "Sub2MrBeast"
+
+print('Starting...')
 
 pause = False
 kicked = False
 autoguess = False
-botName = "Sub2MrBeast"
-
-print('Starting...')
 
 def playercountupdate():
 	driver.implicitly_wait(3)
@@ -101,7 +102,8 @@ def initbot():
 	caps = DesiredCapabilities().CHROME
 	caps["pageLoadStrategy"] = "none"
 	chrome_options = Options()
-	chrome_options.add_argument("--headless")
+	if headlessmode:
+		chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--mute-audio")
 	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
 	os.system('clear')

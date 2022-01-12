@@ -8,8 +8,24 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+url = 'https://skribbl.io/' # No need to change this, unless you want the bot to join a single lobby every time...
+
+headlessmode = False
 playerMinThreshold = 5 # Includes you
-url = 'https://skribbl.io/'
+botName = "EpicSpammer69"
+obnoxious = True
+messages = ["You all suck at this game",
+"Hi I am here to annoy you",
+"How is everybody today?",
+"Please let me know if you like my spamming",
+"Thank you for your valuable feedback!"]
+
+pause = False
+kicked = False
+attempt = 1
+spamcount = 0
+drawcount = 0
+strokecount = 0
 
 colors = {'white': '//*[@id="containerBoard"]/div[2]/div[2]/div[1]/div[1]',
 'black': '//*[@id="containerBoard"]/div[2]/div[2]/div[2]/div[1]',
@@ -41,17 +57,7 @@ drawtools = {'pen': '//*[@id="containerBoard"]/div[2]/div[3]/div[1]',
 'brush3': '//*[@id="containerBoard"]/div[2]/div[4]/div[3]',
 'brush4': '//*[@id="containerBoard"]/div[2]/div[4]/div[4]',
 'clear': '//*[@id="buttonClearCanvas"]',
-'canvas': '//*[@id="canvasGame"]'
-}
-pause = False
-kicked = False
-botName = "BestSpamBot"
-attempt = 1
-obnoxious = True
-messages = ["You all suck at this game", "Hi I am here to annoy you", "How is everybody today?", "Please let me know if you like my spamming"]
-spamcount = 0
-drawcount = 0
-strokecount = 0
+'canvas': '//*[@id="canvasGame"]'}
 
 print('Starting...')
 
@@ -167,7 +173,8 @@ def initbot():
 	caps = DesiredCapabilities().CHROME
 	caps["pageLoadStrategy"] = "normal"
 	chrome_options = Options()
-	chrome_options.add_argument("--headless")
+	if headlessmode:
+		chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--mute-audio")
 	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
 	os.system('clear')
