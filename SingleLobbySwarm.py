@@ -10,7 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import fnmatch
 
-url = 'https://skribbl.io/?wcsRGlqzf7Yn'
+url = 'https://skribbl.io/?WcsRGlqzf7Yn'
 botcount = 6
 
 pause = False
