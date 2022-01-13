@@ -85,6 +85,7 @@ def playercountupdate():
 	return int(playerCount)
 
 def kickcheck():
+	global kicked
 	if obnoxious:
 		try:
 			chatsend("Checking if kicked...")
@@ -152,6 +153,7 @@ def checkdraw():
 		return True
 
 def drawspam():
+	global kicked
 	global drawcount
 	global strokecount
 	print("Starting to Draw")
@@ -220,6 +222,7 @@ def initbot():
 
 def initspam():
 	global spamcount
+	global kicked
 	print('Starting Spam')
 	scounter = 0
 	while True:
