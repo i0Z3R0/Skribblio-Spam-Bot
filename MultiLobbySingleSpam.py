@@ -14,19 +14,20 @@ headlessmode = False
 playerMinThreshold = 5 # Includes you
 botName = "SpammerBot"
 obnoxious = True
-messages = ["You all suck at this game LOL",
-"Hi I am here to annoy you",
+messages = ["You all suck at this game LOL {ಠʖಠ}",
+"Hi I am here to annoy you ᕦ(ò_óˇ)ᕤ",
 "How is everybody today?",
 "Hey Siri, what's the weather like in Antarctica?",
 "Please let me know if you like my ☣️spamming",
 "Thank you for your valuable feedback!",
-"Does anybody here play 🎮Fortnite?",
-"Like👍, subscribe, and hit that notification 🔔bell!",
+"Does anybody here play Fortnite? (+[__]∙:∙)",
+"Like, subscribe, and hit that notification bell!",
 "Guys let's votekick this person",
 "Wait until I draw, I have great artistic talent",
-"Imagine playing skribbl.io 😂 LOL",
-"Please don't kick me, I like it here 🥺 :(",
-"Watch this video to install the bot: youtube com/watch?v=dQw4w9WgXcQ"]
+"Imagine playing skribbl.io LOL",
+"Please don't kick me, I like it here (｡◕‿◕｡)",
+"Watch this video to install the bot: youtube com/watch?v=dQw4w9WgXcQ",
+"¯\_(ツ)_/¯"]
 
 pause = False
 kicked = False
