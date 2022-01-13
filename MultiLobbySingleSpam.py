@@ -11,7 +11,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 url = 'https://skribbl.io/' # No need to change this, unless you want the bot to join a single lobby every time...
 
 headlessmode = False
-playerMinThreshold = 5 # Includes you
+playerMinThreshold = 6 # Includes you
 botName = "ඞSussyBotඞ"
 obnoxious = True
 messages = ["ඞඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞඞ",
