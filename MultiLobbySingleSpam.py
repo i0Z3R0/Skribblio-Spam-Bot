@@ -160,11 +160,11 @@ def drawspam():
 	while True:
 		try:
 			driver.implicitly_wait(0.1)
-			time.sleep(0.2)
+			time.sleep(0.1)
 			driver.find_element(By.XPATH, drawtools["canvas"]).click()
 			strokecount += 1
 			driver.implicitly_wait(0.1)
-			time.sleep(0.2)
+			time.sleep(0.1)
 			driver.find_element(By.XPATH, drawtools["clear"]).click()
 			strokecount += 1
 			if (strokecount % 10 == 0 or strokecount % 21 == 0) and strokecount != 0:
