@@ -14,7 +14,9 @@ headlessmode = False
 playerMinThreshold = 5 # Includes you
 botName = "ඞSussyBotඞ"
 obnoxious = True
-messages = ["ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ"]
+messages = ["ඞඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞඞ",
+"ඞඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞඞ",
+"ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ"]
 
 pause = False
 kicked = False
@@ -63,7 +65,10 @@ def playercountupdate():
 	driver.implicitly_wait(3)
 	playerCount = 0
 	if obnoxious:
-		chatsend('Checking player count...')
+		try:
+			chatsend('Checking player count...')
+		except:
+			pass
 	while playerCount < 1:
 		try:
 			playerCount = driver.find_element(By.XPATH, '//*[@id="containerGamePlayers"]').size['height'] / 48
@@ -77,7 +82,6 @@ def kickcheck():
 		try:
 			chatsend("Checking if kicked...")
 		except:
-
 			return True
 	try:
 		if (driver.find_element(By.XPATH, '//*[@id="modalKicked"]/div/div/div[1]/h4').text) == "You have been kicked.":
