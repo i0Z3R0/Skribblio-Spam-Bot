@@ -88,11 +88,14 @@ def kickcheck():
 		try:
 			chatsend("Checking if kicked...")
 		except:
+
 			return True
 	try:
 		if (driver.find_element(By.XPATH, '//*[@id="modalKicked"]/div/div/div[1]/h4').text) == "You have been kicked.":
+			kicked = True
 			return True
 		if (driver.find_element(By.XPATH, '//*[@id="modalDisconnect"]/div/div/div[1]/h4').text) == "Connection lost.":
+			kicked = True
 			return True
 	except:
 		return False
@@ -175,18 +178,22 @@ def drawspam():
 				try:
 					if kickcheck() == True:
 						print('Kicked, Rejoining')
+						kicked = True
 						return True
 					driver.find_element(By.XPATH, drawtools["fill"]).click()
 					driver.implicitly_wait(0.5)
 				except:
 					print('Kicked, Rejoining')
+					kicked = True
 					return True
 			if strokecount % 50 == 0:
 				if playercountupdate() == 0:
 					print('Kicked, Rejoining')
+					kicked = True
 					return True
 		except:
 			print('Kicked, Rejoining')
+			kicked = True
 			return True
 
 def printupdates():
@@ -219,9 +226,12 @@ def initspam():
 			if scounter % 10 == 0 and scounter != 0:
 				if checkdraw() == True:
 					drawspam()
+					if kicked == True:
+						return True
 			if scounter == 20:
 				if kickcheck() == True:
 					print("Kicked, Rejoining")
+					kicked = True
 					return True
 			if scounter == 30:
 				if playercountupdate() < playerMinThreshold:
@@ -236,6 +246,7 @@ def initspam():
 				chatsend(message)
 			except:
 				print('Kicked, Rejoining')
+				kicked = True
 				return True
 			spamcount += 1
 			scounter += 1
@@ -285,5 +296,6 @@ while True:
 	joinlobby()
 	initspam()
 	printupdates()
+	kicked = False
 
 driver.quit()
