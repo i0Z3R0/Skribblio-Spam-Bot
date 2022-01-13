@@ -12,23 +12,9 @@ url = 'https://skribbl.io/' # No need to change this, unless you want the bot to
 
 headlessmode = False
 playerMinThreshold = 5 # Includes you
-botName = "SpammerBot"
+botName = "ඞSussyBotඞ"
 obnoxious = True
-messages = ["You all suck at this game LOL {ಠʖಠ}",
-"Hi I am here to annoy you ᕦ(ò_óˇ)ᕤ",
-"How is everybody today? ඞ",
-"Hey Siri, what's the weather like in Antarctica?",
-"Please let me know if you like my ☣️spamming",
-"Thank you for your valuable feedback!",
-"Does anybody here play Fortnite? (+[__]∙:∙)",
-"Like, subscribe, and hit that notification bell!",
-"Guys let's votekick this person",
-"Wait until I draw, I have great artistic talent",
-"Imagine playing skribbl LOL",
-"Please don't kick me, I like it here (｡◕‿◕｡)",
-"Watch this video to install the bot: youtube com/watch?v=dQw4w9WgXcQ",
-"¯\_(ツ)_/¯",
-"ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ"]
+messages = ["ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ"]
 
 pause = False
 kicked = False
@@ -122,11 +108,8 @@ def limitcheck():
 
 def chatsend(message):
 	driver.implicitly_wait(2)
-	try:
-		driver.find_element(By.XPATH, '//*[@id="inputChat"]').send_keys(message)
-		driver.find_element(By.XPATH, '//*[@id="inputChat"]').submit()
-	except:
-		pass
+	driver.find_element(By.XPATH, '//*[@id="inputChat"]').send_keys(message)
+	driver.find_element(By.XPATH, '//*[@id="inputChat"]').submit()
 
 def checkdraw():
 	if obnoxious:
