@@ -117,18 +117,29 @@ def chatsend(message):
 
 def checkdraw():
 	if obnoxious:
-		chatsend("Checking for draw popup...")
+		try:
+			chatsend("Checking for draw popup...")
+		except:
+			print('Kicked, Rejoining')
+			kicked = True
+			return False
 	try:
-		drawword = driver.find_element(By.XPATH, '//*[@id="overlay"]/div/div[3]/div[1]')
-		if obnoxious:
-			chatsend(botName + " may not be held liable for any damage caused or sustained by...")
-			time.sleep(0.9)
-			chatsend("the following actions, including any damage caused to third parties as a consequence of...")
-			time.sleep(0.9)
-			chatsend("or during the implementation of the action.")
-			time.sleep(0.9)
-			chatsend("Photosensitivity warning!")
-	except:
+		drawbox = driver.find_element(By.CLASS_NAME, 'wordContainer')
+		drawword = driver.find_element(By.CLASS_NAME, 'word')
+		if drawbox.is_displayed() == True:
+			if obnoxious:
+				time.sleep(1)
+				chatsend(botName + " may not be held liable for any damage caused or sustained by...")
+				time.sleep(0.9)
+				chatsend("the following actions, including any damage caused to third parties as a consequence of...")
+				time.sleep(0.9)
+				chatsend("or during the implementation of the action.")
+				time.sleep(0.9)
+				chatsend("Photosensitivity warning!")
+		else:
+			return False
+	except Exception as e:
+		print("Error: " + str(e))
 		return False
 	# Added this part below because sometimes the draw popup
 	# would time out and the game would choose a random word
@@ -158,7 +169,7 @@ def drawspam():
 	while True:
 		try:
 			driver.implicitly_wait(0.1)
-			time.sleep(0.1)
+			time.sleep(0.15)
 			driver.find_element(By.XPATH, drawtools["canvas"]).click()
 			strokecount += 1
 			driver.implicitly_wait(0.1)
@@ -176,7 +187,7 @@ def drawspam():
 				except:
 					# Assuming not kicked, but rather the turn ended.
 					return True
-			if strokecount % 50 == 0:
+			if strokecount % 200 == 0:
 				if playercountupdate() == 0:
 					print('Kicked, Rejoining')
 					kicked = True
@@ -206,7 +217,9 @@ def initbot():
 	chrome_options.add_argument("--mute-audio")
 	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
 	driver.get(url)
+	time.sleep(2)
 	driver.execute_script("window.localStorage.setItem(arguments[0], arguments[1]);", "avatarZ", avatarv)
+	time.sleep(2)
 	print('Avatar Change Successful')
 	os.system('clear')
 
@@ -220,8 +233,8 @@ def initspam():
 			if scounter % 10 == 0 and scounter != 0:
 				if checkdraw() == True:
 					drawspam()
-					if kicked == True:
-						return True
+				if kicked == True:
+					return True
 			if scounter == 20:
 				if kickcheck() == True:
 					print("Kicked, Rejoining")
