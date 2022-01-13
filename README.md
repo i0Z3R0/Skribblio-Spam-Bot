@@ -10,13 +10,13 @@
   * [Multi Lobby Single Spam](#multi-lobby-single-spam)
 - [Detailed Overview](#detailed-overview)
   * [Single Lobby Swarm](#single-lobby-swarm-1)
-    + [**Overview**](#overview)
-    + [**Detailed Breakdown**](#detailed-breakdown)
-    + [**Customization Options**](#customization-options)
+    + [Overview](#overview)
+    + [Detailed Breakdown](#detailed-breakdown)
+    + [Customization Options](#customization-options)
   * [Multi Lobby Single Spam](#multi-lobby-single-spam-1)
-    + [**Overview**](#overview-1)
-    + [**Detailed Breakdown**](#detailed-breakdown-1)
-    + [**Customization Options**](#customization-options-1)
+    + [Overview](#overview-1)
+    + [Detailed Breakdown](#detailed-breakdown-1)
+    + [Customization Options](#customization-options-1)
 
 # Prerequisites
 - Latest version of Python3
