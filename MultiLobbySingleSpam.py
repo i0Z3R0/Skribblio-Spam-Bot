@@ -229,6 +229,7 @@ def initspam():
 def joinlobby():
 	global attempt
 	global lobbycount
+	global playerspammed
 	driver.get(url)
 	driver.implicitly_wait(1.5)
 	driver.find_element(By.XPATH, '//*[@id="inputName"]').clear()
