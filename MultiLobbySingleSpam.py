@@ -173,7 +173,6 @@ def drawspam():
 			strokecount += 1
 			if (strokecount % 10 == 0 or strokecount % 21 == 0) and strokecount != 0:
 				try:
-					chatsend("Are you guys enjoying my drawing?")
 					if kickcheck() == True:
 						print('Kicked, Rejoining')
 						return True
