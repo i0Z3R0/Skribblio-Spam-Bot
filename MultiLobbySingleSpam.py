@@ -161,7 +161,7 @@ def drawspam():
 			time.sleep(0.1)
 			driver.find_element(By.XPATH, drawtools["clear"]).click()
 			strokecount += 1
-			if (strokecount % 10 == 0 or strokecount % 21 == 0) and strokecount != 0:
+			if (strokecount % 20 == 0 or strokecount % 41 == 0) and strokecount != 0:
 				try:
 					if kickcheck() == True:
 						print('Kicked, Rejoining')
@@ -281,6 +281,7 @@ initbot()
 while True:
 	joinlobby()
 	initspam()
+	os.system('clear')
 	printupdates()
 	kicked = False
 
