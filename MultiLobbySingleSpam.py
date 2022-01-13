@@ -16,7 +16,7 @@ botName = "SpammerBot"
 obnoxious = True
 messages = ["You all suck at this game LOL {ಠʖಠ}",
 "Hi I am here to annoy you ᕦ(ò_óˇ)ᕤ",
-"How is everybody today?",
+"How is everybody today? ඞ",
 "Hey Siri, what's the weather like in Antarctica?",
 "Please let me know if you like my ☣️spamming",
 "Thank you for your valuable feedback!",
@@ -27,7 +27,8 @@ messages = ["You all suck at this game LOL {ಠʖಠ}",
 "Imagine playing skribbl LOL",
 "Please don't kick me, I like it here (｡◕‿◕｡)",
 "Watch this video to install the bot: youtube com/watch?v=dQw4w9WgXcQ",
-"¯\_(ツ)_/¯"]
+"¯\_(ツ)_/¯",
+"ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ"]
 
 pause = False
 kicked = False
@@ -194,7 +195,7 @@ def drawspam():
 					kicked = True
 					return True
 		except:
-			# Assuming not kicked, but rather the turn ended. 
+			# Assuming not kicked, but rather the turn ended.
 			return True
 
 def printupdates():
