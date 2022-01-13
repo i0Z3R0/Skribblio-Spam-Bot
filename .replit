@@ -1,2 +1,2 @@
 language = "bash"
-run = "clear && echo https://github.com/i0Z3R0/Skribblio-Spam-Bot"
+run = "clear && echo https://github.com/i0Z3R0/Skribblio-Spam-Bot && echo 'This project cannot be run on Replit as there is no Chrome browser'"

@@ -26,6 +26,8 @@ attempt = 1
 spamcount = 0
 drawcount = 0
 strokecount = 0
+lobbycount = 0
+playerspammed = 0
 
 colors = {'white': '//*[@id="containerBoard"]/div[2]/div[2]/div[1]/div[1]',
 'black': '//*[@id="containerBoard"]/div[2]/div[2]/div[2]/div[1]',
@@ -125,10 +127,13 @@ def checkdraw():
 			chatsend("or during the implementation of the action.")
 			time.sleep(0.9)
 			chatsend("Photosensitivity warning!")
+	except:
+		return False
+	try:
 		drawword.click()
 		return True
 	except:
-		return False
+		return True
 
 def drawspam():
 	global drawcount
@@ -140,7 +145,7 @@ def drawspam():
 		time.sleep(0.01)
 		driver.find_element(By.XPATH, colors["black"]).click()
 	except:
-		# Spawnnkilled on draw turn    oof
+		# Spawnnkilled on draw turn...oof
 		# Didn't even add this until people spawnkilled me lol
 		return True
 	drawcount += 1
@@ -154,7 +159,7 @@ def drawspam():
 			time.sleep(0.2)
 			driver.find_element(By.XPATH, drawtools["clear"]).click()
 			strokecount += 1
-			if (strokecount % 10 == 0 or strokecount % 11 == 0) and strokecount != 0:
+			if (strokecount % 10 == 0 or strokecount % 21 == 0) and strokecount != 0:
 				try:
 					chatsend("Are you guys enjoying my drawing?")
 					if kickcheck() == True:
@@ -167,6 +172,16 @@ def drawspam():
 					return True
 		except:
 			return True
+
+def printupdates():
+	global spamcount
+	global drawcount
+	global strokecount
+	global lobbycount
+	print(f'Spammed a total of {spamcount} messages in {lobbycount} lobbies')
+	print(f'Drawed a total of {drawcount} times in {lobbycount} lobbies')
+	print(f'Flashed lights a total of {strokecount} times in {lobbycount} lobbies')
+	print(f'Annoyed a total of {playerspammed} players in {lobbycount} lobbies')
 
 def initbot():
 	global driver
@@ -195,7 +210,6 @@ def initspam():
 			if scounter == 30:
 				if playercountupdate() < playerMinThreshold:
 					print('Not enough players, leaving lobby')
-					print(f'Spammed a total of {spamcount} messages in all lobbies')
 					time.sleep(0.75)
 					if obnoxious:
 						chatsend("Not enough players, I'm out of here")
@@ -214,6 +228,7 @@ def initspam():
 
 def joinlobby():
 	global attempt
+	global lobbycount
 	driver.get(url)
 	driver.implicitly_wait(1.5)
 	driver.find_element(By.XPATH, '//*[@id="inputName"]').clear()
@@ -244,11 +259,14 @@ def joinlobby():
 		print('Error: ' + str(e))
 	print(f'Found a Lobby! Attempts Taken: {attempt}\nPlayer Count: {pcount}')
 	attempt = 1
+	lobbycount += 1
+	playerspammed += pcount
 
 initbot()
 
 while True:
 	joinlobby()
 	initspam()
+	printupdates()
 
 driver.quit()
