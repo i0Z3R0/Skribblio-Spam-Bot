@@ -78,10 +78,10 @@ This tool joins a single bot in random public lobbies. This should be used if yo
 The bot will go to https://skribbl.io/ and join a random public lobby. It will then loop through an array of predetermined messages to spam, and send them one by one. Every 10 messages, it will check if it's the bot's turn to draw. Every 20, it will check if the bot is kicked, and will rejoin a lobby if it is. Every 30, it will check if the player count is under a predetermined threshold, and join another lobby if applicable. 
 
 When the bot detects it's its (lol) turn to draw, it will be as annoying as possible. After the bot detects the draw popup, it will first spew out a set of "legal messages" in the chat: 
-```
-botName may not be held liable for any damage caused or sustained by the following actions, including any damage caused to third parties as a consequence of or during the implementation of the action. 
-Photosensitivity warning!
-```
+
+*botName may not be held liable for any damage caused or sustained by the following actions, including any damage caused to third parties as a consequence of or during the implementation of the action. 
+Photosensitivity warning!*
+
 Then, the bot will proceed to (by default)\* paint the entire canvas black, then white, then black, then white, and repeat that until kicked or the draw turn is over. If the bot is kicked or disconnected at any time, it will reload the page and join another random public lobby, print out the current status, and it can run forever. The drawing portion of the bot is not super optimized because by the time the bot draws, everybody will likely have already votekicked it. 
 
 If the bot detects it has been kicked or disconnected from a lobby, it will reload the page and attempt to join a new one. Then, it will print out the current status, including the number of lobbies spammed in, number of messages spammed, 
