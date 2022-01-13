@@ -1,23 +1,22 @@
 # Skribblio-Spam-Bot
 
 # Table of Contents
-- ### Table of Contents
-- ### Prerequisites
-- ### Installation
-- ### About
-- ### Overview of Features
-  - ### Single Lobby Swarm
-  - ### Multi Lobby Single Spam
-- ### Detailed Overview
-  - ### Single Lobby Swarm
-    - ### Overview
-      - ### Detailed Breakdown
-      - ### Customization Options
-  - ### Multi Lobby Single Spam
-    - ### Overview
-      - ### Detailed Breakdown
-      - ### Customization Options
-
+- [Table of Contents](#table-of-contents)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [About](#about)
+- [Overview of Features](#overview-of-features)
+  * [Single Lobby Swarm](#single-lobby-swarm)
+  * [Multi Lobby Single Spam](#multi-lobby-single-spam)
+- [Detailed Overview](#detailed-overview)
+  * [Single Lobby Swarm](#single-lobby-swarm-1)
+    + [**Overview**](#--overview--)
+    + [**Detailed Breakdown**](#--detailed-breakdown--)
+    + [**Customization Options**](#--customization-options--)
+  * [Multi Lobby Single Spam](#multi-lobby-single-spam-1)
+    + [**Overview**](#--overview---1)
+    + [**Detailed Breakdown**](#--detailed-breakdown---1)
+    + [**Customization Options**](#--customization-options---1)
 
 # Prerequisites
 - Latest version of Python3
