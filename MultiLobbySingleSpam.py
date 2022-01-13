@@ -12,7 +12,7 @@ url = 'https://skribbl.io/' # No need to change this, unless you want the bot to
 
 headlessmode = False
 playerMinThreshold = 5 # Includes you
-botName = "EpicSpammer69"
+botName = "FortniteSpammer69"
 obnoxious = True
 messages = ["You all suck at this game",
 "Hi I am here to annoy you",
