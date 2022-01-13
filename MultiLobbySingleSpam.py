@@ -186,8 +186,7 @@ def drawspam():
 					driver.find_element(By.XPATH, drawtools["fill"]).click()
 					driver.implicitly_wait(0.5)
 				except:
-					print('Kicked, Rejoining')
-					kicked = True
+					# Assuming not kicked, but rather the turn ended.
 					return True
 			if strokecount % 50 == 0:
 				if playercountupdate() == 0:
@@ -195,8 +194,7 @@ def drawspam():
 					kicked = True
 					return True
 		except:
-			print('Kicked, Rejoining')
-			kicked = True
+			# Assuming not kicked, but rather the turn ended. 
 			return True
 
 def printupdates():
