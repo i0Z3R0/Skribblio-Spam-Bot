@@ -12,7 +12,7 @@ url = 'https://skribbl.io/' # No need to change this, unless you want the bot to
 
 headlessmode = False
 playerMinThreshold = 5 # Includes you
-botName = "ProSpammer"
+botName = "SpammerBot"
 obnoxious = True
 messages = ["You all suck at this game LOL",
 "Hi I am here to annoy you",
@@ -25,7 +25,8 @@ messages = ["You all suck at this game LOL",
 "Wait until I draw, I have great artistic talent",
 "#🌊TeamSeasOP #🌊TeamSeasOP SAY IT WITH ME!!!",
 "Imagine playing skribbl.io😂",
-"Please don't kick me, I like it here 🥺"]
+"Please don't kick me, I like it here 🥺",
+"Watch this video to install the bot: youtube com/watch?v=dQw4w9WgXcQ"]
 
 pause = False
 kicked = False
