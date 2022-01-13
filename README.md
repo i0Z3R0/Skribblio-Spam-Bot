@@ -1,5 +1,9 @@
 # Skribblio-Spam-Bot
 
+[Github](https://github.com/i0Z3R0/Skribblio-Spam-Bot)
+
+[Replit](https://replit.com/@0Z3R0/Skribblio-Spam-Bot)
+
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
