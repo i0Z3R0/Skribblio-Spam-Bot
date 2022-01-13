@@ -16,7 +16,8 @@ botName = "ඞSussyBotඞ"
 obnoxious = True
 messages = ["ඞඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞඞ",
 "ඞඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞඞ",
-"ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ"]
+"ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ",
+"ඞඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞඞ"]
 
 pause = False
 kicked = False
