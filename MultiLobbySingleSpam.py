@@ -137,6 +137,10 @@ def checkdraw():
 			chatsend("Photosensitivity warning!")
 	except:
 		return False
+	# Added this part below because sometimes the draw popup
+	# would time out and the game would choose a random word
+	# Then the bot would think it's not its turn to draw
+	# So this is my temporary fix
 	try:
 		drawword.click()
 		return True
