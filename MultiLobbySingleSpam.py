@@ -12,13 +12,20 @@ url = 'https://skribbl.io/' # No need to change this, unless you want the bot to
 
 headlessmode = False
 playerMinThreshold = 5 # Includes you
-botName = "FortniteSpammer69"
+botName = "ProSpammer"
 obnoxious = True
-messages = ["You all suck at this game",
+messages = ["You all suck at this game LOL",
 "Hi I am here to annoy you",
 "How is everybody today?",
-"Please let me know if you like my spamming",
-"Thank you for your valuable feedback!"]
+"Please let me know if you like my ☣️spamming",
+"Thank you for your valuable feedback!",
+"Does anybody here play Fortnite?",
+"👍Like, subscribe, and hit that notification 🔔bell!",
+"Guys let's votekick this person",
+"Wait until I draw, I have great artistic talent",
+"#🌊TeamSeasOP #🌊TeamSeasOP SAY IT WITH ME!!!",
+"Imagine playing skribbl.io😂",
+"Please don't kick me, I like it here 🥺"]
 
 pause = False
 kicked = False

@@ -13,7 +13,7 @@ import fnmatch
 url = 'https://skribbl.io/?XXXXXXXXXXXX'
 headlessmode = True
 botcount = 6
-botName = "FortniteSpammer"
+botName = "ProSpammer"
 
 print('Starting...')
 
