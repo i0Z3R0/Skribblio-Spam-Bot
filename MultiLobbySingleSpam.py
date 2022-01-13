@@ -181,7 +181,12 @@ def drawspam():
 				except:
 					print('Kicked, Rejoining')
 					return True
+			if strokecount % 50 == 0:
+				if playercountupdate() == 0:
+					print('Kicked, Rejoining')
+					return True
 		except:
+			print('Kicked, Rejoining')
 			return True
 
 def printupdates():
