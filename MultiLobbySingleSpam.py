@@ -14,10 +14,8 @@ headlessmode = False
 playerMinThreshold = 6 # Includes you
 botName = "ඞSussyBotඞ"
 obnoxious = True
-messages = ["ඞඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞඞ",
-"ඞඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞඞ",
-"ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ",
-"ඞඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞඞ"]
+messages = ["ඞඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞඞ", "ඞඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞඞ", "ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ", "ඞඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞඞ"]
+avatarv = "[0,28,13,-1]"
 
 pause = False
 kicked = False
@@ -104,7 +102,8 @@ def limitcheck():
 	except:
 		# Don't need to initiate lobby rejoin, it'll happen automatically later
 		# This optimizes the code a bit
-		pass
+		# Had to add this
+		return True
 	if lastmsg == "Spam detected! You're sending too many messages.":
 		pause = True
 		time.sleep(3)
@@ -198,6 +197,7 @@ def printupdates():
 
 def initbot():
 	global driver
+	global avatarv
 	caps = DesiredCapabilities().CHROME
 	caps["pageLoadStrategy"] = "normal"
 	chrome_options = Options()
@@ -205,6 +205,9 @@ def initbot():
 		chrome_options.add_argument("--headless")
 	chrome_options.add_argument("--mute-audio")
 	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
+	driver.get(url)
+	driver.execute_script("window.localStorage.setItem(arguments[0], arguments[1]);", "avatarZ", avatarv)
+	print('Avatar Change Successful')
 	os.system('clear')
 
 def initspam():
@@ -282,7 +285,11 @@ def joinlobby():
 	playerspammed += pcount
 
 initbot()
-
+joinlobby()
+initspam()
+os.system('clear')
+printupdates()
+kicked = False
 while True:
 	joinlobby()
 	initspam()

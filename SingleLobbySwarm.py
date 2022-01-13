@@ -10,13 +10,16 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import fnmatch
 
-url = 'https://skribbl.io/?XXXXXXXXXXXX'
+#url = 'https://skribbl.io/?XXXXXXXXXXXX'
+url = 'https://skribbl.io/?acx2xZISexim'
 headlessmode = True
 botcount = 6
 botName = "ProSpammer"
+avatarv = "[0,28,13,-1]"
 
 print('Starting...')
 
+amogus = ["ඞඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞඞ", "ඞඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞඞ", "ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ", "ඞඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞඞ"]
 pause = False
 kicked = False
 autoguess = False
@@ -108,13 +111,26 @@ def initbot():
 	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
 	os.system('clear')
 	tablist = []
-	for i in range(botcount):
+
+	# Avatar Bot
+	driver.get(url)
+	time.sleep(3)
+	driver.execute_script("window.localStorage.setItem(arguments[0], arguments[1]);", "avatar", avatarv)
+	print('Bot Avatar Change Successful')
+	driver.refresh()
+	driver.implicitly_wait(1.5)
+	driver.find_element(By.XPATH, '//*[@id="inputName"]').clear()
+	driver.find_element(By.XPATH, '//*[@id="inputName"]').send_keys(botName + str(1))
+	time.sleep(0.1)
+	tablist.append(driver.current_window_handle)
+	print('1 Bot Ready to Join Game')
+	for i in range(botcount - 1):
 		driver.switch_to.new_window('tab')
 		driver.get(url)
 		driver.implicitly_wait(1.5)
 		driver.find_element(By.XPATH, '//*[@id="inputName"]').clear()
-		driver.find_element(By.XPATH, '//*[@id="inputName"]').send_keys(botName + str(i + 1))
-		time.sleep(0.2)
+		driver.find_element(By.XPATH, '//*[@id="inputName"]').send_keys(botName + str(i))
+		time.sleep(0.1)
 		tablist.append(driver.current_window_handle)
 		print('1 Bot Ready to Join Game')
 	tempvar = input("Press Enter to Join")
@@ -153,6 +169,10 @@ while True:
 
 	if chatmsg == "!ag" or chatmsg == "!autoguess":
 		autoguess = True
+
+	if chatmsg == "!au" or chatmsg == "!amogus":
+		for message in amogus:
+			sendall(message)
 
 	if chatmsg == "!c" or chatmsg == "!clear":
 		os.system('clear')
