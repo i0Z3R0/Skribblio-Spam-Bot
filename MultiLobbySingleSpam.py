@@ -17,7 +17,7 @@ obnoxious = True
 messages = ["You all suck at this game LOL",
 "Hi I am here to annoy you",
 "How is everybody today?",
-"Hey siri, what's the weather like in Antarctica?",
+"Hey Siri, what's the weather like in Antarctica?",
 "Please let me know if you like my ☣️spamming",
 "Thank you for your valuable feedback!",
 "Does anybody here play 🎮Fortnite?",
