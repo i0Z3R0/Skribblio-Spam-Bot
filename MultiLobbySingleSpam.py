@@ -24,7 +24,7 @@ messages = ["You all suck at this game LOL {ಠʖಠ}",
 "Like, subscribe, and hit that notification bell!",
 "Guys let's votekick this person",
 "Wait until I draw, I have great artistic talent",
-"Imagine playing skribblio LOL",
+"Imagine playing skribbl LOL",
 "Please don't kick me, I like it here (｡◕‿◕｡)",
 "Watch this video to install the bot: youtube com/watch?v=dQw4w9WgXcQ",
 "¯\_(ツ)_/¯"]
