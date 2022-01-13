@@ -139,7 +139,6 @@ def checkdraw():
 		else:
 			return False
 	except Exception as e:
-		print("Error: " + str(e))
 		return False
 	# Added this part below because sometimes the draw popup
 	# would time out and the game would choose a random word
