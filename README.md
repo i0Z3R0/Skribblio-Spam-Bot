@@ -25,12 +25,16 @@
 # Prerequisites
 - Latest version of Python3
 - Latest version of Pip
+- Code or text editor to change some settings (config file in the near future)
+- Decent to high level specs.
+##### This program will use a good portion of your processing power and memory, especially the single lobby swarm bot. For comparison, my Mac with an Apple M1 chip, 8 GB of RAM, 1 Twitch stream open, some random tabs (Gmail etc.), one skribbl.io game open, and a code editor (Atom) open is somewhat noticeably slower with the single lobby spammer, but not by too much. The autoguessing is just slightly slower but it's noticeable. When running the multi lobby single spammer in headless mode, there's very minimal lag when I do other things.
 
 # Installation
 1. git clone https://github.com/i0Z3R0/Skribblio-Spam-Bot.git
 2. cd Skribblio-Spam-Bot
 3. pip3.9 install -r requirements.txt
-4. python3.9 MultiLobbySingleSpam.py **or** python3.9 SingleLobbySwarm.py
+4. If on Windows: Open the program in a code editor, search for os.system('clear'), and replace with os.system('cls').
+5. python3.9 MultiLobbySingleSpam.py **or** python3.9 SingleLobbySwarm.py
 #### Note: ChromeDriver is NOT required, webdriver_manager will automatically download the matching version of ChromeDriver for your OS.
 
 # About
@@ -63,14 +67,15 @@ In a nutshell, the spambots use ChromeDriver and Selenium and multiple tabs to s
 ### **Overview**
 This tool lets you join up to 6 bots in a single private lobby. Skribblio will put you in a different lobby if there are over 6 connections to the same private lobby from 1 IP. Although this can by bypassed with proxies, rarely would you need more than 6 users in a single lobby. This should be used if you want to quickly ruin a single lobby's entire experience, as it try to guess the word and make the game unenjoyable for everyone. Mass reactions (thumbs up and down) will also make people mad. This tool does not have kick detection or automatic rejoining, it's more of a flood tool than a persistent tool (I personally haven't used this for more than 2 minutes at a time, people tend to recreate private lobbies after that).
 ### **Detailed Breakdown**
-This tool will join as many bots as you want into a single private game (the limit is 6 based on IP). If any bot is stuck on an ad, it will simply close the tab with that bot. Therefore, botCount should be set to one higher than the actual amount of bots you want to join. This tool will let you send messages as all the bots at once in the chat.
+This tool will join as many\* bots as you want into a single private game (the limit is 6 based on IP). If any bot is stuck on an ad, it will simply close the tab with that bot. Therefore, botCount should be set to one higher than the actual amount of bots you want to join. This tool will let you send messages as all the bots at once in the chat.
 
 Using regular expression and the current length of the word and hints, it will compile a list of all the possible words. Then, it will cycle through each tab containing the bots and send each possible messsage. The bots will also check the latest message to see if the word was guessed correctly. It will then send that in all tabs, thus allowing the bots to all guess the word correct. However, if autoguessing is used on words with too much possible options (4, 5, 6 letter), it will take too long autoguessing this isn't pauseable after started. If it is one of the bots' turn to draw, it will select the first word, get the word, and all the bots will send "The word is: word" and then send the word to quickly guess the word correctly.
 
-!ag or !autoguess, !c or !clear, !tu or !thumbsup, !td or !thumbsdown, and !vk or !votekick are all "commands" that you can enter when prompted to enter a message to send. They will do special actions, such as autoguess the current word, clear the terminal, or click on icons in the game. Additionally, !leave will have all the bots leave the game and the script will end.
+!ag or !autoguess, !au or !amogus, !c or !clear, !tu or !thumbsup, !td or !thumbsdown, and !vk or !votekick are all "commands" that you can enter when prompted to enter a message to send. They will do special actions, such as autoguess the current word, clear the terminal, or click on icons in the game. Additionally, !leave will have all the bots leave the game and the script will end.
+##### * Every lobby has a maximum player limit of 12. If the lobby is full, the game will send a bot to a random public lobby, and will mess up the entire program. Therefore, put only as many bots as the server can take (+1). 
 ### **Customization Options**
 - **URL** (Line 13): This is the url to a private lobby. Should be in the format https://skribbl.io/?XXXXXX
-- **Headless Mode** (Line 14): This determines whether ChromeDriver runs in headless mode or not. Headless mode is highly highly recommended, it makes everything much faster, but you are unable to actually see the Chrome tabs. Therefore, you should join the lobby yourself (and set botCount to 6)
+- **Headless Mode** (Line 14): This determines whether ChromeDriver runs in headless mode or not. Headless mode is highly highly recommended, it makes everything much more faster, but you are unable to actually see the Chrome tabs. Therefore, you should join the lobby yourself (and set botCount to 6)
 - **Bot Count** (Line 15): This sets the number of bots that will join the game. However, you must set the botCount to be 1 more than however many you want. This is because the second bot will (99% of the time) get stuck on an ad, and waiting for the ad to complete will take too long. If you want 5 bots to join, put 6.
 - **Bot Name** (Line 16): This sets the name that the bots will have when they join. Each individual bot will have a number (from 1 through botCount) appended.
 - **Avatar Values** - String (Line 18): This determines the bots' avatars in the game. To get these values, go to [skribbl](https://skribbl.io/) and change your avatar to your desired avatar. Then, open up developer tools. Go to Application > Storage > Local Storage > https://skribbl.io > avatar, then double click and copy the value. Should look something like [6,0,2,-1]. Note: avatarv is a STRING, not a LIST.

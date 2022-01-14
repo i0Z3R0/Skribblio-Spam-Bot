@@ -25,6 +25,7 @@ drawcount = 0
 strokecount = 0
 lobbycount = 0
 playerspammed = 0
+counter = 0
 
 colors = {'white': '//*[@id="containerBoard"]/div[2]/div[2]/div[1]/div[1]',
 'black': '//*[@id="containerBoard"]/div[2]/div[2]/div[2]/div[1]',
@@ -163,6 +164,7 @@ def drawspam():
 	except:
 		# Spawnnkilled on draw turn...oof
 		# Didn't even add this until people spawnkilled me lol
+		kicked = True
 		return True
 	drawcount += 1
 	while True:
@@ -303,10 +305,17 @@ os.system('clear')
 printupdates()
 kicked = False
 while True:
+	counter += 1
 	joinlobby()
 	initspam()
 	os.system('clear')
 	printupdates()
 	kicked = False
+	if counter == 10:
+		print("Restarting Bot...")
+		time.sleep(10)
+		counter = 0
+		driver.quit()
+		initbot()
 
 driver.quit()
