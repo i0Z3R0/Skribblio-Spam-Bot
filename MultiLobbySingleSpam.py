@@ -16,6 +16,7 @@ botName = "ඞSussyBotඞ"
 obnoxious = True
 messages = ["ඞඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞ SUS ඞඞ", "ඞඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞ SUSSY BAKA ඞඞ", "ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ", "ඞඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞ AMOGUS ඞඞ"]
 avatarv = "[0,28,13,-1]"
+log = True
 
 pause = False
 kicked = False
@@ -87,6 +88,9 @@ def kickcheck():
 		if (driver.find_element(By.XPATH, '//*[@id="modalKicked"]/div/div/div[1]/h4').text) == "You have been kicked.":
 			kicked = True
 			return True
+	except:
+		return False
+	try:
 		if (driver.find_element(By.XPATH, '//*[@id="modalDisconnect"]/div/div/div[1]/h4').text) == "Connection lost.":
 			kicked = True
 			return True
@@ -218,9 +222,7 @@ def initbot():
 	chrome_options.add_argument("--mute-audio")
 	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
 	driver.get(url)
-	time.sleep(2)
-	driver.execute_script("window.localStorage.setItem(arguments[0], arguments[1]);", "avatarZ", avatarv)
-	time.sleep(2)
+	driver.execute_script("window.localStorage.setItem(arguments[0], arguments[1]);", "avatar", avatarv)
 	print('Avatar Change Successful')
 	os.system('clear')
 
@@ -282,6 +284,10 @@ def joinlobby():
 	print('Joined a Game')
 	print('Checking Player Count')
 	driver.implicitly_wait(1)
+	if (driver.find_element(By.XPATH, '//*[@id="modalDisconnect"]/div/div/div[1]/h4').text) == "Connection lost.":
+		print('Disconnected, Rejoining')
+		joinlobby()
+	driver.implicitly_wait(1)
 	pcount = playercountupdate()
 	if pcount < playerMinThreshold:
 		attempt += 1
@@ -298,6 +304,8 @@ def joinlobby():
 	lobbycount += 1
 	playerspammed += pcount
 
+#if log == True:
+	# lobal logfile = open('logs.txt', 'a')
 initbot()
 joinlobby()
 initspam()
