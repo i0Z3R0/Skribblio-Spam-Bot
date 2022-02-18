@@ -102,6 +102,7 @@ def initbot():
 	global driver
 	global tablist
 	global botcount
+	os.environ['WDM_LOG_LEVEL'] = '0'
 	caps = DesiredCapabilities().CHROME
 	caps["pageLoadStrategy"] = "none"
 	chrome_options = Options()
