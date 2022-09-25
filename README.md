@@ -4,6 +4,8 @@
 
 [Replit](https://replit.com/@0Z3R0/Skribblio-Spam-Bot)
 
+#### Note: Due to updates by Skribblio, I am unsure if the Single Lobby Swarm will still work as it seems you are limited to 3 joins in a private lobby from a single IP, and using proxies would be too slow and not worth the time to implement. 
+
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
